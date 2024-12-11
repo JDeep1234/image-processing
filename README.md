@@ -1,17 +1,18 @@
 # Smart OCR Product Analyzer
 
-A modern web application that uses OCR (Optical Character Recognition) to extract product details from images. Built with React, TypeScript, and Python, this application leverages machine learning to automatically detect and extract information such as brand name, pack size, expiry date, batch number, and MRP from product images.
+A modern web application that uses OCR (Optical Character Recognition) to extract product details from images. Built with React, TypeScript, and Python, this application leverages the Qwen-VL (Vision Language) model to automatically detect and extract information such as brand name, pack size, expiry date, batch number, and MRP from product images.
 
 ## Features
 
 - 🖼️ Drag-and-drop image upload interface
-- 🔍 Automatic extraction of product details
+- 🔍 Automatic extraction of product details using Qwen-VL
 - ⚡ Real-time analysis feedback
 - 📊 Clean tabular display of results
 - 🚨 Expiry date validation and warnings
 - 📱 Responsive design for all devices
 - 🎯 High accuracy text detection
 - 🔒 Error handling and validation
+- 🌐 Multilingual support via Qwen-VL
 
 ## Tech Stack
 
@@ -29,17 +30,36 @@ A modern web application that uses OCR (Optical Character Recognition) to extrac
 ### Backend
 - Flask
 - PyTorch
-- Transformers (Hugging Face)
+- Qwen-VL (Vision Language Model)
+- ModelScope
 - PIL (Python Imaging Library)
 - CUDA support for GPU acceleration
 - Docker
+
+## Model Details
+
+### Qwen-VL Model
+The application uses the Qwen-VL model, a powerful vision-language model that excels at:
+- Understanding and analyzing product images
+- Extracting text in multiple languages
+- High accuracy in OCR tasks
+- Natural language understanding for better context
+
+Key advantages of Qwen-VL:
+- Better multilingual support compared to traditional OCR
+- Improved accuracy in product detail extraction
+- Context-aware text recognition
+- Flexible prompt understanding
+- Enhanced performance with optimization
 
 ## Prerequisites
 
 - Node.js 18+
 - Python 3.8+
 - Docker (for deployment)
-- CUDA-compatible GPU (optional, for faster processing)
+- CUDA-compatible GPU (recommended for faster processing)
+- 8GB+ RAM
+- 20GB+ disk space (for model storage)
 
 ## Getting Started
 
@@ -90,7 +110,7 @@ src/
 ### Backend Structure
 ```
 backend/
-├── app.py         # Main Flask application
+├── app.py         # Main Flask application with Qwen-VL integration
 ├── Dockerfile     # Container configuration
 └── requirements.txt
 ```
@@ -117,7 +137,11 @@ docker build -t smart-ocr-analyzer .
 docker run -p 8080:8080 smart-ocr-analyzer
 ```
 
-For production deployment, consider using AWS SageMaker for the ML model deployment and container orchestration services like AWS ECS or Kubernetes.
+For production deployment, we recommend:
+- AWS SageMaker for ML model deployment (supports GPU acceleration)
+- Container orchestration with AWS ECS or Kubernetes
+- At least 16GB RAM for production workloads
+- GPU instance for faster processing
 
 ## Environment Variables
 
@@ -127,6 +151,16 @@ For production deployment, consider using AWS SageMaker for the ML model deploym
 ### Backend
 - `PORT`: Server port (default: 8080)
 - `FLASK_ENV`: Environment mode (development/production)
+- `CUDA_VISIBLE_DEVICES`: GPU device selection (if multiple GPUs available)
+
+## Model Performance Optimization
+
+The application includes several optimizations for the Qwen-VL model:
+- BetterTransformer optimization enabled
+- CUDA acceleration when available
+- Batch processing support
+- Caching of model weights
+- Optimized prompt engineering for better accuracy
 
 ## Contributing
 
@@ -142,7 +176,8 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## Acknowledgments
 
-- [Microsoft GIT Base Model](https://huggingface.co/microsoft/git-base-textcaps) for OCR capabilities
-- [Hugging Face Transformers](https://huggingface.co/docs/transformers/index) for ML model integration
+- [Qwen-VL Model](https://huggingface.co/Qwen/Qwen-VL) for vision-language capabilities
+- [ModelScope](https://modelscope.cn/models) for model integration
+- [Hugging Face Transformers](https://huggingface.co/docs/transformers/index) for ML model support
 - [Tailwind CSS](https://tailwindcss.com/) for styling
 - [React Dropzone](https://react-dropzone.js.org/) for file upload functionality
