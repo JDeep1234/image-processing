@@ -1,8 +1,8 @@
-streamlit==1.20.0  # or the latest stable version  
-torch==2.0.1  # or the latest stable version compatible with your setup  
-transformers==4.30.0  # or the latest stable version  
-opencv-python-headless==4.7.0.72  # Use headless version to avoid GUI issues  
-Pillow==9.5.0  # Image processing library  
-pandas==1.5.3  # Data manipulation and analysis  
-numpy==1.23.5  # Numerical operations  
-ultralytics==8.0.110  # For YOLO models
+streamlit>=1.20.0,<2.0.0  # Use the latest stable version  
+torch>=2.2.0,<2.3.0  # Use a compatible version for Python 3.12  
+transformers>=4.30.0,<5.0.0  # Use the latest stable version  
+opencv-python-headless>=4.7.0,<5.0.0  # Use headless version  
+Pillow>=9.5.0,<10.0.0  # Image processing library  
+pandas>=1.5.3,<2.0.0  # Data manipulation and analysis  
+numpy>=1.23.5,<2.0.0  # Numerical operations  
+ultralytics>=8.0.110,<9.0.0  # For YOLO models
