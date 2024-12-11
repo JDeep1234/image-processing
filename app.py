@@ -9,7 +9,7 @@ import streamlit as st
 from PIL import Image
 from transformers import AutoProcessor, Qwen2VLForConditionalGeneration
 import torch
-from pyngrok import ngrok
+
 
 # Define a multipage app
 st.sidebar.title("Navigation")
