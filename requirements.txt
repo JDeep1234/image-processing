@@ -1,0 +1,5 @@
+streamlit  
+git+https://github.com/huggingface/transformers  
+Pillow  
+torch  
+torchvision
