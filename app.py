@@ -1,5 +1,3 @@
-# Install required packages  
-!pip install flask flask-ngrok easyocr opencv-python-headless roboflow transformers torch pillow pyngrok  
 
 import os
 import cv2
