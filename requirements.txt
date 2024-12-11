@@ -5,4 +5,4 @@ opencv-python-headless>=4.7.0,<5.0.0  # Use headless version
 Pillow>=9.5.0,<10.0.0  # Image processing library  
 pandas>=1.5.3,<2.0.0  # Data manipulation and analysis  
 numpy>=1.23.5,<2.0.0  # Numerical operations  
-ultralytics>=8.3.40  # For the trained YOLO model
+ultralytics==8.3.40  # For the trained YOLO model
