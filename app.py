@@ -12,7 +12,7 @@ def load_model():
         torch_dtype="auto",  
         device_map="auto",  
     )  
-    processor = Qwen2VLProcessor.from_pretrained("Qwen/Qwen2-VL-2B-Instruct")  # Adjusted line  
+    processor = Qwen2VLProcessor.from_pretrained("Qwen/Qwen2-VL-2B-Instruct")  
     return model, processor  
 
 model, processor = load_model()  
@@ -35,7 +35,7 @@ def analyze_image(image):
         text=[text_prompt],  
         images=[image],  
         padding=True,  
-        return_tensors="pt"  # This line may need to be changed if using TensorFlow  
+        return_tensors="pt"  
     )  
 
     output_ids = model.generate(**inputs, max_new_tokens=1024)  
