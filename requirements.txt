@@ -1,7 +1,0 @@
-streamlit>=1.40.0
-Pillow>=11.0.0
-transformers @ git+https://github.com/huggingface/transformers
-torch==2.0.1+cu118
-torchvision==0.15.2+cu118
-torchaudio==2.0.1+cu118
-bitsandbytes
