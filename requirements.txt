@@ -3,6 +3,6 @@ opencv-python-headless  # Use headless version to avoid libGL issues
 pandas  
 numpy  
 torch  # If you need PyTorch, ensure it's compatible with CPU  
-transformers  
+transformers>=4.46.0  # or the latest version available 
 ultralytics  # Ensure this is compatible with your use case  
 Pillow
