@@ -4,7 +4,11 @@ from PIL import Image
 from datetime import datetime  
 import re  
 
-# Load model and processor  
+# Streamlit app title and description  
+st.title("Qwen2-VL Product Details Extractor")  
+st.write("Upload an image of the product to extract details like brand, pack size, expiry date, and MRP.")  
+
+# Cache the model and processor to optimize loading time  
 @st.cache_resource  
 def load_model():  
     model = Qwen2VLForConditionalGeneration.from_pretrained(  
@@ -15,6 +19,7 @@ def load_model():
     processor = Qwen2VLProcessor.from_pretrained("Qwen/Qwen2-VL-2B-Instruct")  
     return model, processor  
 
+# Load the model and processor once  
 model, processor = load_model()  
 
 # Function to analyze the uploaded image  
@@ -24,7 +29,7 @@ def analyze_image(image):
             "role": "user",  
             "content": [  
                 {"type": "image"},  
-                {"type": "text", "text": "Read brand details, pack size, brand name, expiry date, and MRP"}  
+                {"type": "text", "text": "Read brand details, pack size, expiry date, and MRP"}  
             ]  
         }  
     ]  
@@ -51,7 +56,7 @@ def analyze_image(image):
 
     return output_text  
 
-# Function to extract expiry date and MRP from output text  
+# Function to extract expiry date and MRP from the output text  
 def extract_details(output_text):  
     date_patterns = [  
         r'\b(\d{2}/\d{2}/\d{4})\b',  
@@ -84,27 +89,24 @@ def extract_details(output_text):
     else:  
         return "No valid expiry date found", False  
 
-# Streamlit app layout  
-st.title("Product Details Extractor")  
-st.write("Upload an image of the product to extract details.")  
-
-uploaded_file = st.file_uploader("Choose an image...", type=["png", "jpg", "jpeg"])  
+# Upload and process image  
+uploaded_file = st.file_uploader("Upload an image...", type=["png", "jpg", "jpeg"])  
 
 if uploaded_file is not None:  
     image = Image.open(uploaded_file)  
-    st.image(image, caption='Uploaded Image', use_container_width=True)  
+    st.image(image, caption="Uploaded Image", use_column_width=True)  
 
-    if st.button("Analyze"):  
+    if st.button("Analyze Image"):  
         with st.spinner("Analyzing..."):  
             output_text = analyze_image(image)  
             expiry_date, is_expired = extract_details(output_text)  
 
             st.subheader("Extracted Details")  
-            st.write("Output Text:")  
+            st.write("Raw Output Text:")  
             st.write(output_text)  
 
-            # Display the results in a table  
+            # Display the extracted details  
             st.table({  
-                "Expiry Date": [expiry_date],  
-                "Status": ["Expired" if is_expired else "Valid"]  
-            })
+                "Field": ["Expiry Date", "Status"],  
+                "Details": [expiry_date, "Expired" if is_expired else "Valid"]  
+            })  
