@@ -1,5 +1,3 @@
 streamlit  
 git+https://github.com/huggingface/transformers  
-Pillow  
-
-accelerate>=0.26.0 
+Pillow
