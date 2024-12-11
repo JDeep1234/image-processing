@@ -1,16 +1,15 @@
 import streamlit as st  
-from transformers import Qwen2VLForConditionalGeneration, AutoProcessor  
+from transformers import AutoProcessor, Qwen2VLForConditionalGeneration  
 from PIL import Image  
 from datetime import datetime  
 import re  
-import torch  
 
 # Load model and processor  
 @st.cache_resource  
 def load_model():  
     model = Qwen2VLForConditionalGeneration.from_pretrained(  
         "Qwen/Qwen2-VL-2B-Instruct",  
-        torch_dtype="auto",  
+        torch_dtype="auto",  # This line may need to be removed if using TensorFlow  
         device_map="auto",  
     )  
     processor = AutoProcessor.from_pretrained("Qwen/Qwen2-VL-2B-Instruct")  
@@ -36,11 +35,10 @@ def analyze_image(image):
         text=[text_prompt],  
         images=[image],  
         padding=True,  
-        return_tensors="pt"  
+        return_tensors="pt"  # This line may need to be changed if using TensorFlow  
     )  
 
-    inputs = inputs.to("cuda" if torch.cuda.is_available() else "cpu")  
-
+    # Assuming you will use a different method to generate outputs without PyTorch  
     output_ids = model.generate(**inputs, max_new_tokens=1024)  
 
     generated_ids = [  
@@ -95,7 +93,7 @@ uploaded_file = st.file_uploader("Choose an image...", type=["png", "jpg", "jpeg
 
 if uploaded_file is not None:  
     image = Image.open(uploaded_file)  
-    st.image(image, caption='Uploaded Image', use_container_width=True)  # Updated line  
+    st.image(image, caption='Uploaded Image', use_container_width=True)  
 
     if st.button("Analyze"):  
         with st.spinner("Analyzing..."):  
