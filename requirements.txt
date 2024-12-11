@@ -1,6 +1,5 @@
 streamlit  
 git+https://github.com/huggingface/transformers  
 Pillow  
-torch==1.13.0+cu117  # Ensure this matches your installed version  
-torchvision==0.14.0+cu117  
+
 accelerate>=0.26.0 
