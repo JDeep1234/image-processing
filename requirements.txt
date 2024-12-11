@@ -1,8 +1,8 @@
-streamlit  
-opencv-python-headless  # Use headless version to avoid libGL issues  
-pandas  
-numpy  
-torch  # If you need PyTorch, ensure it's compatible with CPU  
-transformers>=4.46.0  # or the latest version available 
-ultralytics  # Ensure this is compatible with your use case  
-Pillow
+streamlit==1.20.0  # or the latest stable version  
+torch==2.0.1  # or the latest stable version compatible with your setup  
+transformers==4.30.0  # or the latest stable version  
+opencv-python-headless==4.7.0.72  # Use headless version to avoid GUI issues  
+Pillow==9.5.0  # Image processing library  
+pandas==1.5.3  # Data manipulation and analysis  
+numpy==1.23.5  # Numerical operations  
+ultralytics==8.0.110  # For YOLO models
