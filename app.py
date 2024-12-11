@@ -1,5 +1,5 @@
 import streamlit as st  
-from transformers import AutoProcessor, Qwen2VLForConditionalGeneration  
+from transformers import Qwen2VLForConditionalGeneration, Qwen2VLProcessor  
 from PIL import Image  
 from datetime import datetime  
 import re  
@@ -9,10 +9,10 @@ import re
 def load_model():  
     model = Qwen2VLForConditionalGeneration.from_pretrained(  
         "Qwen/Qwen2-VL-2B-Instruct",  
-        torch_dtype="auto",  # This line may need to be removed if using TensorFlow  
+        torch_dtype="auto",  
         device_map="auto",  
     )  
-    processor = AutoProcessor.from_pretrained("Qwen/Qwen2-VL-2B-Instruct")  
+    processor = Qwen2VLProcessor.from_pretrained("Qwen/Qwen2-VL-2B-Instruct")  # Adjusted line  
     return model, processor  
 
 model, processor = load_model()  
@@ -38,7 +38,6 @@ def analyze_image(image):
         return_tensors="pt"  # This line may need to be changed if using TensorFlow  
     )  
 
-    # Assuming you will use a different method to generate outputs without PyTorch  
     output_ids = model.generate(**inputs, max_new_tokens=1024)  
 
     generated_ids = [  
